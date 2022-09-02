@@ -1,0 +1,39 @@
+{% extends 'store/main.html' %}
+{% load widget_tweaks %}
+
+<title>{% block title %}Add Category{% endblock title %}</title>
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            
+    </div>              
+{% endfor %}
+{% endif %} 
+<div class="container">
+    <h3 style="text-align: center;">Add Category</h3>
+  <form method="POST" autocomplete="off" enctype="multipart/form-data">
+      {% csrf_token %}
+  
+      <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="name">Category Name</label>
+            {% render_field form.name|attr:'required:true'  class="form-control" placeholder="Name" %}
+          </div>
+         
+        </div>
+  
+      <button type="submit" class="btn btn-info btn-lg btn-block" style="border-radius: 0%;">Add Category</button>
+    </form>
+  </div>
+  
+
+
+
+{% endblock %}
+
+

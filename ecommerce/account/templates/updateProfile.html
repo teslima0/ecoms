@@ -1,0 +1,65 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+<title>{% block title %}Registeration{% endblock title %}</title>
+
+{% block content %}
+<div class="container">
+    <h3 style="text-align: center;">Guest User Signup Form</h3>
+    
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        
+                </div>
+                
+                
+           {% endfor %}
+        {% endif %}
+
+  <form method="POST" autocomplete="off" enctype="multipart/form-data">
+      {% csrf_token %}
+  
+      <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="first_name">First Name</label>
+            {% render_field u_form.first_name|attr:'required:true'  class="form-control" placeholder="First Name" %}
+          </div>
+          <div class="form-group col-md-6">
+            <label for="last_name">Last Name</label>
+            {% render_field u_form.last_name|attr:'required:true'  class="form-control" placeholder="Last Name" %}
+          </div>
+        </div>
+  
+  
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="username">Username</label>
+            {% render_field u_form.username|attr:'required:true'  class="form-control" placeholder="username" %}
+          </div>
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            {% render_field u_form.email|attr:'required:true' class="form-control" placeholder="email" %}
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="gender">Gender</label>
+            {% render_field  p_form.gender|attr:'required:true'  class="form-control" placeholder="password" %}
+          </div> 
+          
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            {% render_field u_form.password|attr:'required:true'  class="form-control" placeholder="password" %}
+          </div>
+        </div>
+  
+  
+      <button type="submit" class="btn btn-success" style="border-radius: 0%;">Update Profile</button>
+    </form>
+  </div>
+  
+{% endblock content %}

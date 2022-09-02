@@ -1,0 +1,40 @@
+
+{% extends 'store/main.html' %}
+{% load static %}
+<title>{% block title %}login{% endblock title %}</title>
+{% block content %}
+<div>
+<h1 style="text-align: center;">Login here...</h1><br><br>
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            
+    </div>              
+{% endfor %}
+{% endif %}
+  
+        <form action="" method="POST" autocomplete="off" >
+            {% csrf_token %}
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                
+                <input type="text" class="form-control" name="username" placeholder="Username">
+              </div>
+              <div class="form-group col-md-6">
+                
+                <input type="password" class="form-control" name="password" placeholder="Password">
+              </div>
+
+           </div>
+                 <div class="col-auto">
+                    <button type="submit" class="btn btn-info btn-lg btn-block">Login</button>
+                </div>
+        </form>
+      <p> You don't have account? sign up <a href="{% url 'account:signup_guest' %}">here</a></p>.
+      
+    </div>
+{% endblock content %}

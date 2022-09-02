@@ -1,0 +1,31 @@
+{% extends 'store/main.html' %}
+
+<title>{% block title %}update product{% endblock title %}</title>
+{% block content %}
+<h1 style="font-size: 40px; margin-left: 30px;" class="p-2">
+    Update Product
+ </h1>
+ {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        
+                </div>              
+           {% endfor %}
+{% endif %}
+ <div class="container m-5">
+     <form action="" method="post" enctype="multipart/form-data">
+
+         {% csrf_token %}
+         {{ form.as_p }}
+         <input type="submit" name="Submit">
+
+     </form>
+ </div>
+
+{% endblock %}
+
+

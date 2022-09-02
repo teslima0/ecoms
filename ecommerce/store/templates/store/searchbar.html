@@ -1,0 +1,48 @@
+{% extends 'store/main.html' %}
+<title>{% block title %}search result{% endblock title %}</title>
+{% block content %}
+
+    <h2 class="text center" style="margin-left: 20px;"> Search Results:  </h5>
+
+        <hr>
+
+        <div class="container">
+
+            
+                {% if products %}
+    
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-lg-4">
+                        
+                        <img class="thumbnail" src="{{product.imageURL }}">
+                        <div class="box-element product">
+                            <h6><strong>{{product.name}}</strong></h6>
+                            <hr>
+                
+                            <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                                <a class="btn btn-outline-success" href="{% url 'product_details' product.id %}">View</a>
+                                {% if user.is_authenticated %}
+                                    {% if user.is_superuser %}
+                                        <br><br>
+                                        <a class="btn btn-outline-success" href="{% url 'updateProduct' product.id %}">Edit</a>
+                                        <a class="btn btn-outline-danger" href="{% url 'deleteProduct' product.id %}">Delete</a><br>
+                                    {% endif %}
+                                {% endif %}
+                             <h4 style="display: inline-block; justify-content: right;"><strong>N{{product.price|floatformat:2}}</strong></h4>
+                       
+                            </div>
+                    
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                     <p>No Products available </p>
+                {% endif %}
+    
+            </div>
+        
+        
+
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <img  id="tamar-icon" src="{% static 'img/tamarcom.PNG' %}">
+  <a class="navbar-brand" href="{% url 'store' %}">Tcommerce</a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only">(current)</span></a>
+      </li>
+      {% if not user.is_superuser %}
+      <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for category in categories %}
+            <a class="dropdown-item" href="{% url 'store' %}?category={{ category.name }}">{{ category.name }}</a>
+            {% endfor %}
+          </div>
+          
+        </li>
+      {% endif %}
+      {% if user.is_authenticated %}
+          {% if user.is_superuser %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'addCategory' %}">Add-Category <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'ViewCategory' %}">View-Category <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'addProduct' %}">Add-Product <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'view_order' %}">View-Order <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'view_ordered_item' %}">View-OrderItem <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'shipping_info' %}">Shipping-Info <span class="sr-only">(current)</span></a>
+          </li>
+          {% endif %}
+      {% endif %}
+    </ul>
+    
+    <div class="form-inline my-2 my-lg-0">
+
+      {% if  user.is_authenticated %}
+          {% if not user.is_superuser %}
+          <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" name="query" name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          {% endif  %}
+      {% endif  %}
+
+      {% if  user.is_authenticated %}
+          {% if user.is_adminstore %}
+          <a href="{% url 'account:admin_signup' %}"class="btn btn-info">Admin Sign Up</a>
+          {% endif  %}
+      {% endif  %}
+
+      {% if user.is_authenticated %}
+      
+
+       <a href="{% url 'account:logouts' %}"class="btn btn-danger"> Logout</a>
+
+       {% else %}
+       <a href="{% url 'account:signup_guest' %}"class="btn btn-info">Sign Up</a>
+       
+       <a href="{% url 'account:loginpage' %}"class="btn btn-success">Login </a>
+       {% endif  %}
+       <a href="{% url 'cart' %}">
+        <img  id="cart-icon" src="{% static 'img/cart.png' %}">
+      </a>
+      <p id="cart-total">{{cartItems}}</p>
+
+    </div>
+  
+  </div>
+</nav>
+
+ 
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>

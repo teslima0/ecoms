@@ -1,0 +1,47 @@
+{% extends 'store/main.html' %}
+<title>{% block title %}shipping info{% endblock title %}</title>
+{% block content %}
+{%load static%}
+
+
+<br><br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6  style="color:rgb(40, 76, 131); font-weight:bolder;font-size: x-large; text-align: center;">Shipping Info</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        
+        <tr>
+          <th>Customer</th>
+          <th>OrderId</th>
+          <th>City</th>
+          <th>Address</th>
+          <th>State</th>
+          <th>zipcode</th>
+          <th>Ordered Date</th>
+          
+          
+        </tr>
+      </thead>
+      {% for shipping in shippings %}
+      
+      <tr>
+        <td>{{shipping.order.customer}}</td>
+        <td> {{shipping.order.id}}</td>
+        <td> {{shipping.city}}</td>
+        <td> {{shipping.address}}</td>
+        <td> {{shipping.state}}</td>
+        <td> {{shipping.zipcode}}</td>
+        <td> {{shipping.date_added}}</td>
+        
+      </tr>
+     
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock content %}
+

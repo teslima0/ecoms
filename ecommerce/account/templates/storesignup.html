@@ -1,0 +1,55 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+<title>{% block title %}Registeration{% endblock title %}</title>
+
+{% block content %}
+<div class="container">
+    <h3 style="text-align: center;">Guest User Signup Form</h3>
+
+ 
+
+  <form method="POST" autocomplete="off" enctype="multipart/form-data">
+      {% csrf_token %}
+  
+      <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="first_name">First Name</label>
+            {% render_field userForm.first_name|attr:'required:true'  class="form-control" placeholder="First Name" %}
+          </div>
+          <div class="form-group col-md-6">
+            <label for="last_name">Last Name</label>
+            {% render_field userForm.last_name|attr:'required:true'  class="form-control" placeholder="Last Name" %}
+          </div>
+        </div>
+  
+  
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="username">Username</label>
+            {% render_field userForm.username|attr:'required:true'  class="form-control" placeholder="username" %}
+          </div>
+          <div class="form-group col-md-6">
+            <label for="profile_pic">Email</label>
+            {% render_field userForm.email|attr:'required:true' class="form-control" placeholder="email" %}
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Gender</label>
+            {% render_field  userForms.gender|attr:'required:true'  class="form-control" placeholder="password" %}
+          </div> 
+          
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            {% render_field userForm.password|attr:'required:true'  class="form-control" placeholder="password" %}
+          </div>
+        </div>
+  
+  
+      <button type="submit" class="btn btn-success" style="border-radius: 0%;">Sign Up</button>
+    </form>
+  </div>
+  
+{% endblock content %}

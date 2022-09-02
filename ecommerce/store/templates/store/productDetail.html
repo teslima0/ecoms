@@ -1,0 +1,35 @@
+{% extends 'store/main.html' %}
+{% load widget_tweaks %}
+
+<title>{% block title %}product detail{% endblock title %}</title>
+{% block content %}
+
+<div class="row">
+    
+    <div class="col-lg-4">
+        
+        <img class="thumbnail" src="{{products.imageURL }}">
+        <div class="box-element product">
+            <h6><strong>{{products.name}}</strong></h6>
+            <hr>
+            <strong>{{products.description}}</strong>
+            <hr>
+         
+            <button data-product="{{products.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                <a class="btn btn-outline-success" href="{% url 'product_details' products.id %}">View</a>
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <br><br>
+                        <a class="btn btn-outline-success" href="{% url 'updateProduct' product.id %}">Edit</a>
+                        <a class="btn btn-outline-danger" href="{% url 'deleteProduct' product.id %}">Delete</a><br>
+                    {% endif %}
+                {% endif %}
+                <h4 style="display: inline-block; justify-content: right;"><strong>N{{products.price|floatformat:2}}</strong></h4>
+   
+            </div>
+        
+    </div>
+
+</div>
+
+{% endblock content %}
